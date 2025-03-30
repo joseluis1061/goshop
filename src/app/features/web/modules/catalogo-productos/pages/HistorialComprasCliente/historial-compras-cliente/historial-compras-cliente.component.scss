@@ -1,0 +1,109 @@
+// Estilos específicos para el componente de historial de compras
+
+// Animación para expansión de detalles del pedido
+.fa-chevron-up, .fa-chevron-down {
+  transition: transform 0.3s ease;
+}
+
+// Animación de hover para botones
+button {
+  transition: all 0.2s ease;
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// Estilo para la tabla responsive
+.overflow-x-auto {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    height: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(59, 130, 246, 0.5);
+    border-radius: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: rgba(209, 213, 219, 0.5);
+    border-radius: 5px;
+  }
+}
+
+// Estilo para los elementos expandibles
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+
+  td, th {
+    &:first-child {
+      padding-left: 1rem;
+    }
+
+    &:last-child {
+      padding-right: 1rem;
+    }
+  }
+}
+
+// Estilo para las etiquetas de estado
+.rounded-full {
+  &.bg-green-100 {
+    animation: pulse-subtle 2s infinite;
+  }
+}
+
+@keyframes pulse-subtle {
+  0% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.2);
+  }
+  70% {
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+// Mejoras para dispositivos móviles
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  table th {
+    display: none;
+  }
+
+  table td {
+    display: flex;
+    padding: 0.5rem 1rem;
+    text-align: right;
+
+    &:before {
+      content: attr(data-label);
+      font-weight: 600;
+      margin-right: auto;
+      text-align: left;
+    }
+
+    &:first-child {
+      display: block;
+      padding-top: 1rem;
+
+      &:before {
+        display: none;
+      }
+    }
+
+    &:last-child {
+      padding-bottom: 1rem;
+      border-bottom: 2px solid #e5e7eb;
+    }
+  }
+}

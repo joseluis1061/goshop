@@ -2,12 +2,12 @@
   <nav class="bg-blue-600 text-white shadow-md">
     <div class="container mx-auto px-4">
       <div class="flex justify-between items-center py-4">
-        <div>
+        <div routerLink="/catalogo-productos" class="flex items-center space-x-4 cursor-pointer">
           <img src="../assets/logo-transparente.png" alt="logo" class="w-40">
         </div>
 
         <div class="hidden md:flex space-x-6 items-center">
-          <a href="#" class="hover:text-blue-200 transition font-medium"
+          <a routerLink="/catalogo-productos" class="hover:text-blue-200 transition font-medium"
             >Inicio</a
           >
           <a
@@ -20,6 +20,12 @@
           >
           <a href="#" class="hover:text-blue-200 transition font-medium"
             >Contacto</a
+          >
+          <a routerLink="/catalogo-productos/disponibilidad-producto" class="hover:text-blue-200 transition font-medium"
+            >Disponibilidad</a
+          >
+          <a routerLink="/catalogo-productos/historial-compras-cliente" class="hover:text-blue-200 transition font-medium"
+            >Historial</a
           >
         </div>
 

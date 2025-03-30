@@ -1,0 +1,191 @@
+<app-navbar></app-navbar>
+
+<!-- Encabezado -->
+<div class="bg-gray-100 py-8">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+      <div>
+        <h1 class="text-2xl font-bold text-gray-800">Mi Historial de Compras</h1>
+        <p class="text-gray-600">Consulta el estado y detalles de tus pedidos anteriores</p>
+      </div>
+      <div class="mt-4 md:mt-0">
+        <div class="flex items-center space-x-2">
+          <input
+            type="text"
+            placeholder="Buscar por número de pedido..."
+            class="py-2 px-4 rounded-md border border-blue-400 text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 w-full md:w-64"
+          >
+          <button class="bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700 transition">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Filtros -->
+<div class="bg-white border-t border-b border-gray-200">
+  <div class="container mx-auto px-4 py-3">
+    <div class="flex flex-wrap gap-2">
+      <button class="bg-blue-600 text-white px-4 py-1 rounded-full text-sm font-medium hover:bg-blue-700 transition">Todos</button>
+      <button class="bg-gray-200 text-gray-800 px-4 py-1 rounded-full text-sm font-medium hover:bg-gray-300 transition border border-blue-400">Últimos 30 días</button>
+      <button class="bg-gray-200 text-gray-800 px-4 py-1 rounded-full text-sm font-medium hover:bg-gray-300 transition border border-blue-400">Últimos 6 meses</button>
+      <button class="bg-gray-200 text-gray-800 px-4 py-1 rounded-full text-sm font-medium hover:bg-gray-300 transition border border-blue-400">2024</button>
+    </div>
+  </div>
+</div>
+
+<!-- Lista de pedidos -->
+<div class="container mx-auto px-4 py-8">
+  <!-- Sin pedidos (condicional) -->
+  <div *ngIf="purchases.length === 0" class="bg-white rounded-lg shadow-md p-8 text-center">
+    <div class="text-6xl text-gray-300 mb-4">
+      <i class="fas fa-shopping-bag"></i>
+    </div>
+    <h3 class="text-xl font-semibold text-gray-800 mb-2">No tienes pedidos realizados</h3>
+    <p class="text-gray-600 mb-6">Parece que aún no has realizado ninguna compra</p>
+    <a href="#" class="bg-orange-500 text-white px-6 py-2 rounded-md font-medium hover:bg-orange-600 transition inline-flex items-center">
+      <i class="fas fa-shopping-cart mr-2"></i> Ir a la tienda
+    </a>
+  </div>
+
+  <!-- Lista de pedidos -->
+  <div *ngIf="purchases.length > 0" class="space-y-4">
+    <!-- Pedido individual (repetir por cada pedido) -->
+    <div *ngFor="let purchase of purchases" class="bg-white rounded-lg shadow-md overflow-hidden">
+      <!-- Resumen del pedido -->
+      <div class="p-4 border-b border-gray-100">
+        <div class="flex flex-col sm:flex-row justify-between">
+          <div class="mb-3 sm:mb-0">
+            <div class="flex items-center">
+              <span class="text-lg font-semibold text-gray-800">Pedido #{{ purchase.orderNumber }}</span>
+              <span [class]="'ml-3 px-3 py-1 text-xs font-medium rounded-full border ' + getStatusClass(purchase.status)">
+                {{ purchase.status }}
+              </span>
+            </div>
+            <p class="text-sm text-gray-600 mt-1">Realizado el {{ purchase.date }}</p>
+          </div>
+          <div class="flex items-center space-x-4">
+            <div class="text-right">
+              <div class="text-sm text-gray-600">Total del pedido:</div>
+              <div class="font-bold text-lg text-blue-600">${{ purchase.total.toFixed(2) }}</div>
+            </div>
+            <button
+              (click)="toggleOrderDetails(purchase.id)"
+              class="bg-gray-200 hover:bg-gray-300 text-gray-800 w-8 h-8 rounded-full flex items-center justify-center transition"
+            >
+              <i [class]="isOrderExpanded(purchase.id) ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Detalles del pedido (expandible) -->
+      <div *ngIf="isOrderExpanded(purchase.id)" class="p-4 bg-gray-50 border-t border-gray-200">
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead>
+              <tr>
+                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Producto</th>
+                <th class="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Precio</th>
+                <th class="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Cantidad</th>
+                <th class="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Subtotal</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+              <tr *ngFor="let item of purchase.items">
+                <td class="px-4 py-3">
+                  <div class="flex items-center">
+                    <div class="h-12 w-12 flex-shrink-0">
+                      <img [src]="item.image" [alt]="item.name" class="h-12 w-12 rounded-md object-cover">
+                    </div>
+                    <div class="ml-4">
+                      <div class="text-sm font-medium text-gray-900">{{ item.name }}</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-4 py-3 text-right text-sm text-gray-500">${{ item.price.toFixed(2) }}</td>
+                <td class="px-4 py-3 text-right text-sm text-gray-500">{{ item.quantity }}</td>
+                <td class="px-4 py-3 text-right text-sm font-medium text-gray-900">${{ (item.price * item.quantity).toFixed(2) }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Acciones del pedido -->
+        <div class="mt-6 flex flex-col sm:flex-row justify-between items-start sm:items-center border-t border-gray-200 pt-4">
+          <div class="mb-4 sm:mb-0">
+            <button class="text-blue-600 hover:text-blue-800 text-sm font-medium flex items-center">
+              <i class="fas fa-print mr-1"></i> Imprimir factura
+            </button>
+          </div>
+          <div class="flex flex-col sm:flex-row sm:space-x-2 space-y-2 sm:space-y-0">
+            <button class="bg-white border border-blue-400 text-blue-600 hover:bg-blue-50 px-4 py-2 rounded-md text-sm font-medium transition">
+              <i class="fas fa-undo-alt mr-1"></i> Solicitar devolución
+            </button>
+            <button class="bg-orange-500 text-white hover:bg-orange-600 px-4 py-2 rounded-md text-sm font-medium transition">
+              <i class="fas fa-sync mr-1"></i> Comprar de nuevo
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Paginación -->
+  <div *ngIf="purchases.length > 0" class="mt-8 flex justify-center">
+    <nav class="inline-flex rounded-md shadow">
+      <a href="#" class="px-3 py-2 rounded-l-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-50 text-sm">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+      <a href="#" class="px-3 py-2 border-t border-b border-gray-300 bg-blue-600 text-white hover:bg-blue-700 text-sm">1</a>
+      <a href="#" class="px-3 py-2 border-t border-b border-gray-300 bg-white text-gray-500 hover:bg-gray-50 text-sm">2</a>
+      <a href="#" class="px-3 py-2 rounded-r-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-50 text-sm">
+        <i class="fas fa-chevron-right"></i>
+      </a>
+    </nav>
+  </div>
+</div>
+
+<!-- Panel informativo -->
+<div class="bg-gray-100 py-8 border-t border-gray-200">
+  <div class="container mx-auto px-4">
+    <div class="bg-white p-6 rounded-lg shadow-md">
+      <h2 class="text-xl font-bold text-gray-800 mb-4">¿Necesitas ayuda con tu pedido?</h2>
+      <p class="text-gray-600 mb-6">Si tienes alguna duda o problema con tus compras, nuestro equipo de atención al cliente está disponible para ayudarte.</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="border border-blue-400 rounded-md p-4 flex items-start space-x-3">
+          <div class="text-blue-600 text-xl">
+            <i class="fas fa-question-circle"></i>
+          </div>
+          <div>
+            <h3 class="font-semibold text-gray-800">Preguntas frecuentes</h3>
+            <p class="text-sm text-gray-600">Consulta nuestra sección de ayuda para resolver tus dudas.</p>
+            <a href="#" class="text-sm text-blue-600 hover:text-blue-800 font-medium mt-2 inline-block">Ver FAQ</a>
+          </div>
+        </div>
+        <div class="border border-blue-400 rounded-md p-4 flex items-start space-x-3">
+          <div class="text-blue-600 text-xl">
+            <i class="fas fa-truck"></i>
+          </div>
+          <div>
+            <h3 class="font-semibold text-gray-800">Estado de envío</h3>
+            <p class="text-sm text-gray-600">Rastrea tu pedido en tiempo real con nuestro sistema de seguimiento.</p>
+            <a href="#" class="text-sm text-blue-600 hover:text-blue-800 font-medium mt-2 inline-block">Rastrear pedido</a>
+          </div>
+        </div>
+        <div class="border border-blue-400 rounded-md p-4 flex items-start space-x-3">
+          <div class="text-blue-600 text-xl">
+            <i class="fas fa-headset"></i>
+          </div>
+          <div>
+            <h3 class="font-semibold text-gray-800">Contacto</h3>
+            <p class="text-sm text-gray-600">Comunícate con nuestro equipo de atención al cliente.</p>
+            <a href="#" class="text-sm text-blue-600 hover:text-blue-800 font-medium mt-2 inline-block">Contactar soporte</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

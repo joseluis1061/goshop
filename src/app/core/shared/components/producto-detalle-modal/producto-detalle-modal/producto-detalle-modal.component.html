@@ -1,0 +1,108 @@
+<!-- Overlay de fondo -->
+<div class="modal-overlay" (click)="cerrarModal()">
+  <!-- Modal (evitamos que se cierre al hacer clic dentro) -->
+  <div class="modal-container" (click)="$event.stopPropagation()">
+    <!-- Encabezado del modal -->
+    <div class="modal-header">
+      <h2 class="modal-title">{{ data.nombre }}</h2>
+      <button class="modal-close-btn" (click)="cerrarModal()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <!-- Contenido del modal -->
+    <div class="modal-content">
+      <!-- Imagen del producto -->
+      <div class="producto-imagen">
+        <img [src]="data.imagen" [alt]="data.nombre" class="imagen-principal">
+
+        <!-- Etiqueta de descuento (si existe) -->
+        <span *ngIf="data.descuento" class="etiqueta-descuento">
+          -{{ data.descuento }}%
+        </span>
+      </div>
+
+      <!-- Información básica -->
+      <div class="producto-info-basica">
+        <div class="producto-rating">
+          <div class="estrellas">
+            <i *ngFor="let star of getEstrellasLlenas()" class="fas fa-star"></i>
+            <i *ngIf="tieneMitadEstrella()" class="fas fa-star-half-alt"></i>
+            <i *ngFor="let star of getEstrellasVacias()" class="far fa-star"></i>
+          </div>
+          <span class="opiniones">({{ data.opiniones }} opiniones)</span>
+        </div>
+
+        <div class="producto-precio">
+          <span class="precio-actual">${{ data.precio.toFixed(2) }}</span>
+          <span *ngIf="data.precioAnterior" class="precio-anterior">${{ data.precioAnterior.toFixed(2) }}</span>
+        </div>
+
+        <div class="producto-disponibilidad">
+          <span
+            [class]="'estado-badge ' + (data.estado === 'En stock' ? 'en-stock' : data.estado === 'Pocas unidades' ? 'pocas-unidades' : 'agotado')"
+          >
+            {{ data.estado }}
+          </span>
+          <span *ngIf="data.stock > 0" class="stock-info">{{ data.stock }} unidades disponibles</span>
+        </div>
+      </div>
+
+      <!-- Descripción del producto -->
+      <div class="producto-descripcion">
+        <h3 class="seccion-titulo">Descripción</h3>
+        <p>{{ data.descripcion }}</p>
+      </div>
+
+      <!-- Características del producto -->
+      <div class="producto-caracteristicas">
+        <h3 class="seccion-titulo">Características</h3>
+        <ul>
+          <li *ngFor="let caracteristica of data.caracteristicas">
+            <i class="fas fa-check"></i> {{ caracteristica }}
+          </li>
+        </ul>
+      </div>
+
+      <!-- Selector de cantidad -->
+      <div class="cantidad-selector">
+        <h3 class="seccion-titulo">Cantidad</h3>
+        <div class="selector-controles">
+          <button
+            class="selector-btn"
+            [disabled]="cantidad <= 1"
+            (click)="decrementarCantidad()"
+          >
+            <i class="fas fa-minus"></i>
+          </button>
+          <span class="cantidad-valor">{{ cantidad }}</span>
+          <button
+            class="selector-btn"
+            [disabled]="cantidad >= data.stock"
+            (click)="incrementarCantidad()"
+          >
+            <i class="fas fa-plus"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pie del modal con botones de acción -->
+    <div class="modal-footer">
+      <button
+        class="btn-agregar-carrito"
+        [disabled]="data.stock <= 0"
+        (click)="agregarAlCarrito()"
+      >
+        <i class="fas fa-cart-plus"></i> Agregar al carrito
+      </button>
+
+      <button
+        class="btn-ver-disponibilidad"
+        (click)="verDisponibilidadTiendas()"
+      >
+        <i class="fas fa-store"></i> Ver disponibilidad en tiendas
+      </button>
+    </div>
+  </div>
+</div>
