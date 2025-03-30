@@ -1,0 +1,92 @@
+// Estilos para el navbar
+
+// Estilos para el menú de usuario que se renderiza en el overlay
+:host ::ng-deep {
+  .user-menu {
+    animation: menuFadeIn 0.2s ease;
+
+    a, button {
+      transition: all 0.2s ease;
+
+      &:hover {
+        background-color: #f3f4f6;
+      }
+
+      i {
+        width: 16px;
+        text-align: center;
+      }
+    }
+  }
+}
+
+@keyframes menuFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Estilo para las transiciones
+.transition {
+  transition: all 0.2s ease;
+}
+
+// Estilo para el logo
+img.w-40 {
+  max-height: 40px;
+  object-fit: contain;
+}
+
+// Estilos para la barra de búsqueda
+input {
+  background-color: rgba(255, 255, 255, 0.1);
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  &:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+  }
+}
+
+// Estilos para los badges de notificación
+.bg-red-500 {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(239, 68, 68, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}
+
+// Mejoras responsive
+@media (max-width: 768px) {
+  .container {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
+
+// Estilo para el botón activo
+button:focus {
+  outline: none;
+}
+
+// Indicador de usuario logueado
+.bg-green-500 {
+  box-shadow: 0 0 0 2px #1e40af; // bg-blue-600
+}

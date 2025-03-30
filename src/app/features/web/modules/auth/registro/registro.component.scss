@@ -1,4 +1,4 @@
-// Estilos específicos para el componente de login
+// Estilos específicos para el componente de registro
 
 // Estilo para la animación del spinner
 @keyframes spin {
@@ -76,9 +76,50 @@ button, a {
   }
 }
 
-// Efecto de hover para el botón de inicio de sesión
+// Efecto de hover para el botón de registro
 .bg-blue-600 {
   &:hover:not(:disabled) {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   }
+}
+
+// Animación para el mensaje de éxito
+.bg-green-50 {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Estilo para los enlaces en el formulario
+.text-blue-600 {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// Estilo para las etiquetas
+label {
+  font-weight: 500;
+}
+
+// Estilo para los mensajes de ayuda
+.text-xs.text-gray-500 {
+  line-height: 1.4;
+}
+
+// Efecto de hover para los botones sociales
+.border-gray-300:hover {
+  border-color: #d1d5db;
+  background-color: #f9fafb;
 }

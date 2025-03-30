@@ -1,56 +1,82 @@
-  <!-- Barra de navegación -->
-  <nav class="bg-blue-600 text-white shadow-md">
-    <div class="container mx-auto px-4">
-      <div class="flex justify-between items-center py-4">
-        <div routerLink="/catalogo-productos" class="flex items-center space-x-4 cursor-pointer">
-          <img src="../assets/logo-transparente.png" alt="logo" class="w-40">
+<!-- Barra de navegación -->
+<nav class="bg-blue-600 text-white shadow-md">
+  <div class="container mx-auto px-4">
+    <div class="flex justify-between items-center py-4">
+      <div routerLink="/catalogo-productos" class="flex items-center space-x-4 cursor-pointer">
+        <img src="../assets/logo-transparente.png" alt="logo" class="w-40">
+      </div>
+
+      <div class="hidden md:flex space-x-6 items-center">
+        <a routerLink="/catalogo-productos" class="hover:text-blue-200 transition font-medium">Inicio</a>
+        <a href="#" class="hover:text-blue-200 transition font-medium border-b-2 border-white">Productos</a>
+        <a href="#" class="hover:text-blue-200 transition font-medium">Ofertas</a>
+        <a href="#" class="hover:text-blue-200 transition font-medium">Contacto</a>
+        <a routerLink="/catalogo-productos/disponibilidad-producto" class="hover:text-blue-200 transition font-medium">Disponibilidad</a>
+        <a routerLink="/catalogo-productos/historial-compras-cliente" class="hover:text-blue-200 transition font-medium">Historial</a>
+      </div>
+
+      <div class="flex items-center space-x-4">
+        <div class="relative">
+          <input
+            type="text"
+            placeholder="Buscar productos..."
+            class="py-1 px-3 rounded-full text-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 w-36 md:w-64 border border-gray-200 search-input"
+          />
+          <button class="absolute right-2 top-1.5 text-gray-300">
+            <i class="fas fa-search text-xs"></i>
+          </button>
         </div>
 
-        <div class="hidden md:flex space-x-6 items-center">
-          <a routerLink="/catalogo-productos" class="hover:text-blue-200 transition font-medium"
-            >Inicio</a
+        <!-- Menú de usuario con CDK Menu -->
+        <div class="relative">
+          <button
+            class="user-menu-trigger hover:text-blue-200 transition focus:outline-none"
+            [cdkMenuTriggerFor]="userMenu"
           >
-          <a
-            href="#"
-            class="hover:text-blue-200 transition font-medium border-b-2 border-white"
-            >Productos</a
-          >
-          <a href="#" class="hover:text-blue-200 transition font-medium"
-            >Ofertas</a
-          >
-          <a href="#" class="hover:text-blue-200 transition font-medium"
-            >Contacto</a
-          >
-          <a routerLink="/catalogo-productos/disponibilidad-producto" class="hover:text-blue-200 transition font-medium"
-            >Disponibilidad</a
-          >
-          <a routerLink="/catalogo-productos/historial-compras-cliente" class="hover:text-blue-200 transition font-medium"
-            >Historial</a
-          >
-        </div>
-
-        <div class="flex items-center space-x-4">
-          <div class="relative">
-            <input
-              type="text"
-              placeholder="Buscar productos..."
-              class="py-1 px-3 rounded-full text-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 w-36 md:w-64 border border-gray-200"
-            />
-            <button class="absolute right-2 top-1.5 text-gray-300">
-              <i class="fas fa-search text-xs"></i>
-            </button>
-          </div>
-          <a href="#" class="hover:text-blue-200 transition">
             <i class="fas fa-user"></i>
-          </a>
-          <a href="#" class="hover:text-blue-200 transition relative">
-            <i class="fas fa-shopping-cart"></i>
-            <span
-              class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center"
-              >3</span
-            >
-          </a>
+            <!-- Indicador de usuario logueado (opcional) -->
+            <span *ngIf="authService.isLoggedIn" class="absolute -bottom-1 -right-1 w-2 h-2 bg-green-500 rounded-full"></span>
+          </button>
+
+          <!-- Menú desplegable con CDK Menu -->
+          <ng-template #userMenu>
+            <div class="user-menu bg-white rounded-md shadow-lg py-1 w-48" cdkMenu>
+              <!-- Contenido cuando el usuario está autenticado -->
+              <ng-container *ngIf="authService.isLoggedIn">
+                <div class="px-4 py-2 text-sm text-gray-700 border-b border-gray-200">
+                  <p class="font-medium">Hola, {{ authService.currentUser?.name || 'Usuario' }}</p>
+                  <p class="text-xs text-gray-500">{{ authService.currentUser?.email }}</p>
+                </div>
+                <button cdkMenuItem class="w-full text-left px-4 py-2 text-sm text-gray-700" (click)="navigateTo('/mi-perfil')">
+                  <i class="fas fa-user-circle mr-2"></i> Mi Perfil
+                </button>
+                <button cdkMenuItem class="w-full text-left px-4 py-2 text-sm text-gray-700" (click)="navigateTo('/mis-pedidos')">
+                  <i class="fas fa-box mr-2"></i> Mis Pedidos
+                </button>
+                <hr class="my-1">
+                <button cdkMenuItem class="w-full text-left px-4 py-2 text-sm text-red-600" (click)="logout()">
+                  <i class="fas fa-sign-out-alt mr-2"></i> Cerrar Sesión
+                </button>
+              </ng-container>
+
+              <!-- Contenido cuando el usuario NO está autenticado -->
+              <ng-container *ngIf="!authService.isLoggedIn">
+                <button cdkMenuItem class="w-full text-left px-4 py-2 text-sm text-gray-700" (click)="navigateTo('/login')">
+                  <i class="fas fa-sign-in-alt mr-2"></i> Iniciar Sesión
+                </button>
+                <button cdkMenuItem class="w-full text-left px-4 py-2 text-sm text-gray-700" (click)="navigateTo('/registro')">
+                  <i class="fas fa-user-plus mr-2"></i> Registrarse
+                </button>
+              </ng-container>
+            </div>
+          </ng-template>
         </div>
+
+        <a href="#" class="hover:text-blue-200 transition relative">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">3</span>
+        </a>
       </div>
     </div>
-  </nav>
+  </div>
+</nav>

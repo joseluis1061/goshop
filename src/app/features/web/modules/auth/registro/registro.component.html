@@ -1,0 +1,254 @@
+<div class="min-h-screen bg-gray-100 py-10 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-3xl mx-auto">
+    <!-- Logo y título -->
+    <div class="text-center">
+      <div class="flex justify-center">
+        <svg class="w-16 h-16" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+          <rect width="40" height="40" rx="8" fill="#1E40AF"/>
+          <path d="M8 12 L32 12 L30 24 L10 24 L8 12 Z" fill="white"/>
+          <path d="M14 24 L14 28 L16 28 L16 24" fill="white"/>
+          <path d="M24 24 L24 28 L26 28 L26 24" fill="white"/>
+          <path d="M16 16 L24 16 L23 20 L17 20 L16 16 Z" fill="#FB923C"/>
+          <circle cx="15" cy="30" r="2" fill="white"/>
+          <circle cx="25" cy="30" r="2" fill="white"/>
+        </svg>
+      </div>
+      <h2 class="mt-6 text-3xl font-extrabold text-gray-900">
+        Crear una cuenta
+      </h2>
+      <p class="mt-2 text-sm text-gray-600">
+        ¿Ya tienes una cuenta?
+        <a routerLink="/login" class="font-medium text-blue-600 hover:text-blue-500">
+          Inicia sesión aquí
+        </a>
+      </p>
+    </div>
+
+    <!-- Formulario de registro -->
+    <div class="mt-8 bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+      <!-- Mensaje de éxito -->
+      <div *ngIf="registroExitoso" class="mb-6 bg-green-50 border-l-4 border-green-500 p-4">
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <i class="fas fa-check-circle text-green-500"></i>
+          </div>
+          <div class="ml-3">
+            <p class="text-sm text-green-700">
+              ¡Registro exitoso! Serás redirigido a la página de inicio de sesión en unos segundos.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mensaje de error -->
+      <div *ngIf="registroError" class="mb-6 bg-red-50 border-l-4 border-red-500 p-4">
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <i class="fas fa-exclamation-circle text-red-500"></i>
+          </div>
+          <div class="ml-3">
+            <p class="text-sm text-red-700">{{ registroError }}</p>
+          </div>
+        </div>
+      </div>
+
+      <form [formGroup]="registroForm" (ngSubmit)="onSubmit()" class="space-y-6">
+        <!-- Datos personales -->
+        <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-2">
+          <div>
+            <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre</label>
+            <input
+              type="text"
+              id="nombre"
+              formControlName="nombre"
+              class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              [ngClass]="{'border-red-500': hasError('nombre')}"
+            >
+            <p *ngIf="hasError('nombre')" class="mt-2 text-sm text-red-600">
+              {{ getErrorMessage('nombre') }}
+            </p>
+          </div>
+
+          <div>
+            <label for="apellidos" class="block text-sm font-medium text-gray-700">Apellidos</label>
+            <input
+              type="text"
+              id="apellidos"
+              formControlName="apellidos"
+              class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              [ngClass]="{'border-red-500': hasError('apellidos')}"
+            >
+            <p *ngIf="hasError('apellidos')" class="mt-2 text-sm text-red-600">
+              {{ getErrorMessage('apellidos') }}
+            </p>
+          </div>
+        </div>
+
+        <!-- Correo electrónico -->
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700">Correo electrónico</label>
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            [ngClass]="{'border-red-500': hasError('email')}"
+          >
+          <p *ngIf="hasError('email')" class="mt-2 text-sm text-red-600">
+            {{ getErrorMessage('email') }}
+          </p>
+        </div>
+
+        <!-- Contraseña -->
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
+          <div class="mt-1 relative">
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              id="password"
+              formControlName="password"
+              class="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              [ngClass]="{'border-red-500': hasError('password')}"
+            >
+            <button
+              type="button"
+              (click)="togglePasswordVisibility()"
+              class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm">
+              <i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'" class="text-gray-400"></i>
+            </button>
+          </div>
+          <p *ngIf="hasError('password')" class="mt-2 text-sm text-red-600">
+            {{ getErrorMessage('password') }}
+          </p>
+          <p class="mt-1 text-xs text-gray-500">
+            La contraseña debe tener al menos 8 caracteres e incluir mayúsculas, minúsculas, números y caracteres especiales.
+          </p>
+        </div>
+
+        <!-- Confirmar contraseña -->
+        <div>
+          <label for="confirmPassword" class="block text-sm font-medium text-gray-700">Confirmar contraseña</label>
+          <div class="mt-1 relative">
+            <input
+              [type]="showConfirmPassword ? 'text' : 'password'"
+              id="confirmPassword"
+              formControlName="confirmPassword"
+              class="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              [ngClass]="{'border-red-500': hasError('confirmPassword')}"
+            >
+            <button
+              type="button"
+              (click)="toggleConfirmPasswordVisibility()"
+              class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm">
+              <i [class]="showConfirmPassword ? 'fas fa-eye-slash' : 'fas fa-eye'" class="text-gray-400"></i>
+            </button>
+          </div>
+          <p *ngIf="hasError('confirmPassword')" class="mt-2 text-sm text-red-600">
+            {{ getErrorMessage('confirmPassword') }}
+          </p>
+        </div>
+
+        <!-- Dirección -->
+        <div>
+          <label for="direccion" class="block text-sm font-medium text-gray-700">Dirección</label>
+          <input
+            type="text"
+            id="direccion"
+            formControlName="direccion"
+            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            [ngClass]="{'border-red-500': hasError('direccion')}"
+          >
+          <p *ngIf="hasError('direccion')" class="mt-2 text-sm text-red-600">
+            {{ getErrorMessage('direccion') }}
+          </p>
+        </div>
+
+        <!-- Teléfono -->
+        <div>
+          <label for="telefono" class="block text-sm font-medium text-gray-700">Teléfono</label>
+          <input
+            type="tel"
+            id="telefono"
+            formControlName="telefono"
+            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            [ngClass]="{'border-red-500': hasError('telefono')}"
+          >
+          <p *ngIf="hasError('telefono')" class="mt-2 text-sm text-red-600">
+            {{ getErrorMessage('telefono') }}
+          </p>
+        </div>
+
+        <!-- Términos y condiciones -->
+        <div class="flex items-start">
+          <div class="flex items-center h-5">
+            <input
+              id="terminosCondiciones"
+              type="checkbox"
+              formControlName="terminosCondiciones"
+              class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+              [ngClass]="{'border-red-500': hasError('terminosCondiciones')}"
+            >
+          </div>
+          <div class="ml-3 text-sm">
+            <label for="terminosCondiciones" class="font-medium text-gray-700">
+              Acepto los <a href="#" class="text-blue-600 hover:text-blue-500">términos y condiciones</a> y la <a href="#" class="text-blue-600 hover:text-blue-500">política de privacidad</a>
+            </label>
+            <p *ngIf="hasError('terminosCondiciones')" class="mt-2 text-sm text-red-600">
+              Debes aceptar los términos y condiciones para continuar
+            </p>
+          </div>
+        </div>
+
+        <!-- Botón de registro -->
+        <div>
+          <button
+            type="submit"
+            [disabled]="isRegistering || registroForm.invalid || registroExitoso"
+            class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            [ngClass]="{'opacity-70 cursor-not-allowed': isRegistering || registroForm.invalid || registroExitoso}"
+          >
+            <span *ngIf="isRegistering" class="mr-2">
+              <i class="fas fa-spinner fa-spin"></i>
+            </span>
+            {{ isRegistering ? 'Registrando...' : 'Registrarse' }}
+          </button>
+        </div>
+      </form>
+
+      <!-- Separador -->
+      <div class="mt-6">
+        <div class="relative">
+          <div class="absolute inset-0 flex items-center">
+            <div class="w-full border-t border-gray-300"></div>
+          </div>
+          <div class="relative flex justify-center text-sm">
+            <span class="px-2 bg-white text-gray-500">O regístrate con</span>
+          </div>
+        </div>
+
+        <!-- Botones de registro social -->
+        <div class="mt-6 grid grid-cols-2 gap-3">
+          <div>
+            <a href="#" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+              <i class="fab fa-google text-red-500 mr-2"></i>
+              <span>Google</span>
+            </a>
+          </div>
+          <div>
+            <a href="#" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+              <i class="fab fa-facebook-f text-blue-600 mr-2"></i>
+              <span>Facebook</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer simple -->
+  <div class="mt-12 text-center">
+    <p class="text-sm text-gray-600">
+      &copy; 2025 TiendaVirtual. Todos los derechos reservados.
+    </p>
+  </div>
+</div>
