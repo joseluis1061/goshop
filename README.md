@@ -1,0 +1,2 @@
+# goshop
+Proyecto tienda virtual 
