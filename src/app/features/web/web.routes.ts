@@ -25,6 +25,10 @@ export const WEB_ROUTES: Routes = [
   {
     path: 'registro',
     loadComponent: () => import('./modules/auth/registro/registro.component').then((m) => m.RegistroComponent),
+  },
+  {
+    path: 'carrito-compras',
+    loadComponent: () => import('../../core/shared/components/carrito-compras/carrito-compras.component').then((m) => m.CarritoComprasComponent),
   }
 
 ];

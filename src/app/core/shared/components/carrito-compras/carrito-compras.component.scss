@@ -1,0 +1,130 @@
+// Estilos específicos para el componente de carrito de compras
+
+// Animación para entrada de elementos
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Efecto hover para las tarjetas
+.hover\:shadow-md {
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+}
+
+// Estilo para los controles de cantidad
+.border-gray-300 {
+  transition: border-color 0.2s ease;
+
+  &:hover {
+    border-color: #93c5fd; // border-blue-300
+  }
+}
+
+// Estilos para los botones de acción en el selector de cantidad
+button {
+  transition: all 0.2s ease;
+
+  &:active:not(:disabled) {
+    transform: scale(0.95);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+// Animaciones para tarjetas de garantía
+.bg-white {
+  transition: all 0.3s ease;
+
+  .flex-shrink-0 {
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    .flex-shrink-0 {
+      transform: scale(1.1);
+    }
+  }
+}
+
+// Estilos para el contenido vacío
+.text-6xl {
+  transition: all 0.5s ease;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+// Mejoras para responsividad en móviles
+@media (max-width: 768px) {
+  // Aseguramos que los elementos de la tarjeta de productos sean legibles en móvil
+  .md\:flex {
+    display: block;
+    margin-bottom: 1rem;
+
+    > div {
+      margin-bottom: 0.5rem;
+    }
+  }
+}
+
+// Efectos para los botones de productos recomendados
+.text-xs {
+  &.bg-blue-600 {
+    transition: all 0.2s ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+// Estilo de hover para todos los botones
+.hover\:bg-blue-700,
+.hover\:bg-orange-600,
+.hover\:bg-gray-50,
+.hover\:bg-red-50 {
+  transition: background-color 0.2s ease;
+}
+
+// Estilo de icono lock en el botón de pago
+.fa-lock {
+  transition: all 0.3s ease;
+}
+
+.bg-orange-500:hover {
+  .fa-lock {
+    transform: translateY(-2px);
+  }
+}
+
+// Estilos para los iconos de métodos de pago
+.fab {
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: #6b7280; // text-gray-500
+    transform: translateY(-2px);
+  }
+}
