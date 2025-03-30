@@ -1,552 +1,286 @@
-<body class="bg-gray-100 min-h-screen">
-  <app-navbar></app-navbar>
-  <!-- Filtros y categorías -->
-  <div class="container mx-auto px-4 py-6">
-    <div
-      class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6"
-    >
-      <div class="mb-4 md:mb-0">
-        <h1 class="text-2xl font-bold text-gray-800">Nuestros Productos</h1>
-        <p class="text-gray-600">
-          Encuentra todo lo que necesitas en un solo lugar
-        </p>
-      </div>
-
-      <div
-        class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4"
-      >
-        <select
-          class="bg-white border border-blue-400 rounded-md px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
-        >
-          <option>Todas las categorías</option>
-          <option routerLink="/catalogo-productos/productos-por-categorias">Electrónicos</option>
-          <option>Hogar</option>
-          <option>Ropa</option>
-          <option>Alimentos</option>
-        </select>
-
-        <select
-          class="bg-white border border-blue-400 rounded-md px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
-        >
-          <option>Ordenar por: Relevancia</option>
-          <option>Precio: Menor a Mayor</option>
-          <option>Precio: Mayor a Menor</option>
-          <option>Más vendidos</option>
-        </select>
-      </div>
+<app-navbar></app-navbar>
+<!-- Filtros y categorías -->
+<div class="container mx-auto px-4 py-6">
+  <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+    <div class="mb-4 md:mb-0">
+      <h1 class="text-2xl font-bold text-gray-800">Nuestros Productos</h1>
+      <p class="text-gray-600">
+        Encuentra todo lo que necesitas en un solo lugar
+      </p>
     </div>
 
-    <!-- Chips de categorías -->
-    <div class="flex flex-wrap gap-2 mb-6">
-      <button
-        class="bg-blue-600 text-white px-4 py-1 rounded-full text-sm font-medium hover:bg-blue-700 transition"
+    <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
+      <select
+        class="bg-white border border-blue-400 rounded-md px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
       >
-        Todos
-      </button>
-      <button
-        class="bg-gray-200 text-gray-800 px-4 py-1 rounded-full text-sm font-medium hover:bg-gray-300 transition border border-blue-400"
-        routerLink="/catalogo-productos/productos-por-categorias"
+        <option>Todas las categorías</option>
+        <option>Electrónicos</option>
+        <option>Hogar</option>
+        <option>Ropa</option>
+        <option>Alimentos</option>
+      </select>
+
+      <select
+        class="bg-white border border-blue-400 rounded-md px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
       >
-        Electrónicos
-      </button>
-      <button
-        class="bg-gray-200 text-gray-800 px-4 py-1 rounded-full text-sm font-medium hover:bg-gray-300 transition border border-blue-400"
-      >
-        Hogar
-      </button>
-      <button
-        class="bg-gray-200 text-gray-800 px-4 py-1 rounded-full text-sm font-medium hover:bg-gray-300 transition border border-blue-400"
-      >
-        Ropa
-      </button>
-      <button
-        class="bg-gray-200 text-gray-800 px-4 py-1 rounded-full text-sm font-medium hover:bg-gray-300 transition border border-blue-400"
-      >
-        Alimentos
-      </button>
-      <button
-        class="bg-orange-500 text-white px-4 py-1 rounded-full text-sm font-medium hover:bg-orange-600 transition"
-      >
-        Ofertas
-      </button>
+        <option>Ordenar por: Relevancia</option>
+        <option>Precio: Menor a Mayor</option>
+        <option>Precio: Mayor a Menor</option>
+        <option>Más vendidos</option>
+      </select>
     </div>
   </div>
 
-  <!-- Productos Grid -->
-  <div class="container mx-auto px-4 pb-12">
-    <div
-      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+  <!-- Chips de categorías -->
+  <div class="flex flex-wrap gap-2 mb-6">
+    <button
+      class="bg-blue-600 text-white px-4 py-1 rounded-full text-sm font-medium hover:bg-blue-700 transition"
     >
-      <!-- Producto 1 -->
-      <div
-        class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-      >
-        <div class="relative">
-          <img
-            src="../assets/products/1.jpg"
-            alt="Producto 1"
-            class="w-full h-56 object-cover"
-          />
+      Todos
+    </button>
+    <button
+      class="bg-gray-200 text-gray-800 px-4 py-1 rounded-full text-sm font-medium hover:bg-gray-300 transition border border-blue-400"
+      routerLink="/catalogo-productos/productos-por-categorias"
+    >
+      Electrónicos
+    </button>
+    <button
+      class="bg-gray-200 text-gray-800 px-4 py-1 rounded-full text-sm font-medium hover:bg-gray-300 transition border border-blue-400"
+    >
+      Hogar
+    </button>
+    <button
+      class="bg-gray-200 text-gray-800 px-4 py-1 rounded-full text-sm font-medium hover:bg-gray-300 transition border border-blue-400"
+    >
+      Ropa
+    </button>
+    <button
+      class="bg-gray-200 text-gray-800 px-4 py-1 rounded-full text-sm font-medium hover:bg-gray-300 transition border border-blue-400"
+    >
+      Alimentos
+    </button>
+    <button
+      class="bg-orange-500 text-white px-4 py-1 rounded-full text-sm font-medium hover:bg-orange-600 transition"
+    >
+      Ofertas
+    </button>
+  </div>
+</div>
+
+<!-- Productos Grid -->
+<div class="container mx-auto px-4 pb-12">
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+  >
+    <!-- Producto (repetir para cada producto) -->
+    <div
+      *ngFor="let producto of productos"
+      class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+    >
+      <div class="relative">
+        <img
+          [src]="producto.imagen"
+          [alt]="producto.nombre"
+          class="w-full h-56 object-cover cursor-pointer"
+          (click)="abrirDetalleProducto(producto)"
+        />
+        <!-- Etiqueta de descuento (si existe) -->
+        <span
+          *ngIf="producto.descuento"
+          class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded"
+        >-{{ producto.descuento }}%</span>
+      </div>
+      <div class="p-4">
+        <div class="flex justify-between items-start mb-2">
+          <span class="text-xs text-gray-500">{{ producto.categoria }}</span>
+          <div class="flex items-center">
+            <i class="fas fa-star text-yellow-400 text-xs"></i>
+            <span class="text-xs text-gray-600 ml-1">{{ producto.rating }} ({{ producto.opiniones }})</span>
+          </div>
+        </div>
+        <!-- Título del producto (clickeable) -->
+        <h3
+          class="font-semibold text-gray-800 mb-2 cursor-pointer hover:text-blue-600"
+          (click)="abrirDetalleProducto(producto)"
+        >
+          {{ producto.nombre }}
+        </h3>
+        <div class="flex items-end mb-4">
+          <span class="text-lg font-bold text-blue-600">${{ producto.precio }}</span>
+          <span *ngIf="producto.precioAnterior" class="text-sm text-gray-400 line-through ml-2">${{ producto.precioAnterior }}</span>
+        </div>
+        <div class="flex justify-between items-center">
           <span
-            class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded"
-            >-15%</span
+            [class]="'text-xs px-2 py-1 rounded border border-blue-400 ' +
+                    (producto.estado === 'En stock' ? 'text-green-600 bg-green-100' :
+                     producto.estado === 'Pocas unidades' ? 'text-orange-600 bg-orange-100' :
+                     'text-red-600 bg-red-100')"
+          >{{ producto.estado }}</span>
+          <button
+            *ngIf="producto.stock > 0"
+            class="bg-orange-500 text-white px-3 py-1.5 rounded-md text-sm hover:bg-orange-600 transition flex items-center"
+            (click)="agregarAlCarrito(producto, 1)"
           >
-        </div>
-        <div class="p-4">
-          <div class="flex justify-between items-start mb-2">
-            <span class="text-xs text-gray-500">Electrónicos</span>
-            <div class="flex items-center">
-              <i class="fas fa-star text-yellow-400 text-xs"></i>
-              <span class="text-xs text-gray-600 ml-1">4.8 (120)</span>
-            </div>
-          </div>
-          <h3 class="font-semibold text-gray-800 mb-2">
-            Smart TV 4K 55 pulgadas
-          </h3>
-          <div class="flex items-end mb-4">
-            <span class="text-lg font-bold text-blue-600">$699.99</span>
-            <span class="text-sm text-gray-400 line-through ml-2">$799.99</span>
-          </div>
-          <div class="flex justify-between items-center">
-            <span
-              class="text-xs text-green-600 bg-green-100 px-2 py-1 rounded border border-blue-400"
-              >En stock</span
-            >
-            <button
-              class="bg-orange-500 text-white px-3 py-1.5 rounded-md text-sm hover:bg-orange-600 transition flex items-center"
-            >
-              <i class="fas fa-cart-plus mr-1"></i> Agregar
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Producto 2 -->
-      <div
-        class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-      >
-        <div class="relative">
-          <img
-            src="../assets/products/2.jpg"
-            alt="Producto 2"
-            class="w-full h-56 object-cover"
-          />
-        </div>
-        <div class="p-4">
-          <div class="flex justify-between items-start mb-2">
-            <span class="text-xs text-gray-500">Hogar</span>
-            <div class="flex items-center">
-              <i class="fas fa-star text-yellow-400 text-xs"></i>
-              <span class="text-xs text-gray-600 ml-1">4.5 (85)</span>
-            </div>
-          </div>
-          <h3 class="font-semibold text-gray-800 mb-2">
-            Licuadora 5 Velocidades
-          </h3>
-          <div class="flex items-end mb-4">
-            <span class="text-lg font-bold text-blue-600">$49.99</span>
-          </div>
-          <div class="flex justify-between items-center">
-            <span class="text-xs text-green-600 bg-green-100 px-2 py-1 rounded"
-              >En stock</span
-            >
-            <button
-              class="bg-orange-500 text-white px-3 py-1.5 rounded-md text-sm hover:bg-orange-600 transition flex items-center"
-            >
-              <i class="fas fa-cart-plus mr-1"></i> Agregar
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Producto 3 -->
-      <div
-        class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-      >
-        <div class="relative">
-          <img
-            src="../assets/products/3.jpg"
-            alt="Producto 3"
-            class="w-full h-56 object-cover"
-          />
-          <span
-            class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded"
-            >-20%</span
+            <i class="fas fa-cart-plus mr-1"></i> Agregar
+          </button>
+          <button
+            *ngIf="producto.stock <= 0"
+            class="bg-gray-300 text-gray-700 px-3 py-1.5 rounded-md text-sm cursor-not-allowed flex items-center"
           >
-        </div>
-        <div class="p-4">
-          <div class="flex justify-between items-start mb-2">
-            <span class="text-xs text-gray-500">Ropa</span>
-            <div class="flex items-center">
-              <i class="fas fa-star text-yellow-400 text-xs"></i>
-              <span class="text-xs text-gray-600 ml-1">4.7 (63)</span>
-            </div>
-          </div>
-          <h3 class="font-semibold text-gray-800 mb-2">
-            Chaqueta Deportiva Impermeable
-          </h3>
-          <div class="flex items-end mb-4">
-            <span class="text-lg font-bold text-blue-600">$79.99</span>
-            <span class="text-sm text-gray-400 line-through ml-2">$99.99</span>
-          </div>
-          <div class="flex justify-between items-center">
-            <span
-              class="text-xs text-orange-600 bg-orange-100 px-2 py-1 rounded"
-              >Pocas unidades</span
-            >
-            <button
-              class="bg-indigo-600 text-white px-3 py-1.5 rounded-md text-sm hover:bg-indigo-700 transition flex items-center"
-            >
-              <i class="fas fa-cart-plus mr-1"></i> Agregar
-            </button>
-          </div>
+            <i class="fas fa-bell mr-1"></i> Avisar
+          </button>
         </div>
       </div>
-
-      <!-- Producto 4 -->
-      <div
-        class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-      >
-        <div class="relative">
-          <img
-            src="../assets/products/4.jpg"
-            alt="Producto 4"
-            class="w-full h-56 object-cover"
-          />
-        </div>
-        <div class="p-4">
-          <div class="flex justify-between items-start mb-2">
-            <span class="text-xs text-gray-500">Alimentos</span>
-            <div class="flex items-center">
-              <i class="fas fa-star text-yellow-400 text-xs"></i>
-              <span class="text-xs text-gray-600 ml-1">4.9 (42)</span>
-            </div>
-          </div>
-          <h3 class="font-semibold text-gray-800 mb-2">
-            Café Gourmet Premium 1kg
-          </h3>
-          <div class="flex items-end mb-4">
-            <span class="text-lg font-bold text-blue-600">$24.99</span>
-          </div>
-          <div class="flex justify-between items-center">
-            <span class="text-xs text-green-600 bg-green-100 px-2 py-1 rounded"
-              >En stock</span
-            >
-            <button
-              class="bg-indigo-600 text-white px-3 py-1.5 rounded-md text-sm hover:bg-indigo-700 transition flex items-center"
-            >
-              <i class="fas fa-cart-plus mr-1"></i> Agregar
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Producto 5 -->
-      <div
-        class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-      >
-        <div class="relative">
-          <img
-            src="../assets/products/5.jpg"
-            alt="Producto 5"
-            class="w-full h-56 object-cover"
-          />
-        </div>
-        <div class="p-4">
-          <div class="flex justify-between items-start mb-2">
-            <span class="text-xs text-gray-500">Electrónicos</span>
-            <div class="flex items-center">
-              <i class="fas fa-star text-yellow-400 text-xs"></i>
-              <span class="text-xs text-gray-600 ml-1">4.6 (98)</span>
-            </div>
-          </div>
-          <h3 class="font-semibold text-gray-800 mb-2">
-            Auriculares Bluetooth Premium
-          </h3>
-          <div class="flex items-end mb-4">
-            <span class="text-lg font-bold text-blue-600">$129.99</span>
-          </div>
-          <div class="flex justify-between items-center">
-            <span class="text-xs text-green-600 bg-green-100 px-2 py-1 rounded"
-              >En stock</span
-            >
-            <button
-              class="bg-indigo-600 text-white px-3 py-1.5 rounded-md text-sm hover:bg-indigo-700 transition flex items-center"
-            >
-              <i class="fas fa-cart-plus mr-1"></i> Agregar
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Producto 6 -->
-      <div
-        class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-      >
-        <div class="relative">
-          <img
-            src="../assets/products/6.jpg"
-            alt="Producto 6"
-            class="w-full h-56 object-cover"
-          />
-        </div>
-        <div class="p-4">
-          <div class="flex justify-between items-start mb-2">
-            <span class="text-xs text-gray-500">Hogar</span>
-            <div class="flex items-center">
-              <i class="fas fa-star text-yellow-400 text-xs"></i>
-              <span class="text-xs text-gray-600 ml-1">4.3 (51)</span>
-            </div>
-          </div>
-          <h3 class="font-semibold text-gray-800 mb-2">
-            Juego de Sábanas 100% Algodón
-          </h3>
-          <div class="flex items-end mb-4">
-            <span class="text-lg font-bold text-blue-600">$35.99</span>
-          </div>
-          <div class="flex justify-between items-center">
-            <span class="text-xs text-green-600 bg-green-100 px-2 py-1 rounded"
-              >En stock</span
-            >
-            <button
-              class="bg-indigo-600 text-white px-3 py-1.5 rounded-md text-sm hover:bg-indigo-700 transition flex items-center"
-            >
-              <i class="fas fa-cart-plus mr-1"></i> Agregar
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Producto 7 -->
-      <div
-        class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-      >
-        <div class="relative">
-          <img
-            src="../assets/products/7.jpg"
-            alt="Producto 7"
-            class="w-full h-56 object-cover"
-          />
-          <span
-            class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded"
-            >-10%</span
-          >
-        </div>
-        <div class="p-4">
-          <div class="flex justify-between items-start mb-2">
-            <span class="text-xs text-gray-500">Ropa</span>
-            <div class="flex items-center">
-              <i class="fas fa-star text-yellow-400 text-xs"></i>
-              <span class="text-xs text-gray-600 ml-1">4.4 (37)</span>
-            </div>
-          </div>
-          <h3 class="font-semibold text-gray-800 mb-2">
-            Zapatillas Running Ergonómicas
-          </h3>
-          <div class="flex items-end mb-4">
-            <span class="text-lg font-bold text-blue-600">$89.99</span>
-            <span class="text-sm text-gray-400 line-through ml-2">$99.99</span>
-          </div>
-          <div class="flex justify-between items-center">
-            <span class="text-xs text-red-600 bg-red-100 px-2 py-1 rounded"
-              >Agotado</span
-            >
-            <button
-              class="bg-gray-300 text-gray-700 px-3 py-1.5 rounded-md text-sm cursor-not-allowed flex items-center"
-            >
-              <i class="fas fa-bell mr-1"></i> Avisar
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Producto 8 -->
-      <div
-        class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-      >
-        <div class="relative">
-          <img
-            src="../assets/products/8.jpg"
-            alt="Producto 8"
-            class="w-full h-56 object-cover"
-          />
-        </div>
-        <div class="p-4">
-          <div class="flex justify-between items-start mb-2">
-            <span class="text-xs text-gray-500">Alimentos</span>
-            <div class="flex items-center">
-              <i class="fas fa-star text-yellow-400 text-xs"></i>
-              <span class="text-xs text-gray-600 ml-1">4.7 (68)</span>
-            </div>
-          </div>
-          <h3 class="font-semibold text-gray-800 mb-2">
-            Set de Especias Orgánicas
-          </h3>
-          <div class="flex items-end mb-4">
-            <span class="text-lg font-bold text-blue-600">$19.99</span>
-          </div>
-          <div class="flex justify-between items-center">
-            <span class="text-xs text-green-600 bg-green-100 px-2 py-1 rounded"
-              >En stock</span
-            >
-            <button
-              class="bg-indigo-600 text-white px-3 py-1.5 rounded-md text-sm hover:bg-indigo-700 transition flex items-center"
-            >
-              <i class="fas fa-cart-plus mr-1"></i> Agregar
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Paginación -->
-    <div class="mt-10 flex justify-center">
-      <nav class="inline-flex rounded-md shadow">
-        <a
-          href="#"
-          class="px-3 py-2 rounded-l-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-50 text-sm"
-        >
-          <i class="fas fa-chevron-left"></i>
-        </a>
-        <a
-          href="#"
-          class="px-3 py-2 border-t border-b border-gray-300 bg-blue-600 text-white hover:bg-blue-700 text-sm"
-          >1</a
-        >
-        <a
-          href="#"
-          class="px-3 py-2 border-t border-b border-gray-300 bg-white text-gray-500 hover:bg-gray-50 text-sm"
-          >2</a
-        >
-        <a
-          href="#"
-          class="px-3 py-2 border-t border-b border-gray-300 bg-white text-gray-500 hover:bg-gray-50 text-sm"
-          >3</a
-        >
-        <a
-          href="#"
-          class="px-3 py-2 border-t border-b border-gray-300 bg-white text-gray-400 text-sm"
-          >...</a
-        >
-        <a
-          href="#"
-          class="px-3 py-2 border-t border-b border-gray-300 bg-white text-gray-500 hover:bg-gray-50 text-sm"
-          >8</a
-        >
-        <a
-          href="#"
-          class="px-3 py-2 rounded-r-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-50 text-sm"
-        >
-          <i class="fas fa-chevron-right"></i>
-        </a>
-      </nav>
     </div>
   </div>
 
-  <!-- Footer -->
-  <footer class="bg-blue-800 text-white pt-12 pb-8">
-    <div class="container mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div>
-          <h3 class="font-bold text-lg mb-4">TiendaVirtual</h3>
-          <p class="text-gray-400 mb-4">
-            Tu tienda online de confianza con los mejores productos al mejor
-            precio.
-          </p>
-          <div class="flex space-x-4">
-            <a href="#" class="text-gray-400 hover:text-white transition"
-              ><i class="fab fa-facebook-f"></i
-            ></a>
-            <a href="#" class="text-gray-400 hover:text-white transition"
-              ><i class="fab fa-twitter"></i
-            ></a>
-            <a href="#" class="text-gray-400 hover:text-white transition"
-              ><i class="fab fa-instagram"></i
-            ></a>
-            <a href="#" class="text-gray-400 hover:text-white transition"
-              ><i class="fab fa-youtube"></i
-            ></a>
-          </div>
-        </div>
-
-        <div>
-          <h3 class="font-bold text-lg mb-4">Categorías</h3>
-          <ul class="text-gray-400 space-y-2">
-            <li>
-              <a href="#" class="hover:text-white transition">Electrónicos</a>
-            </li>
-            <li><a href="#" class="hover:text-white transition">Hogar</a></li>
-            <li><a href="#" class="hover:text-white transition">Ropa</a></li>
-            <li>
-              <a href="#" class="hover:text-white transition">Alimentos</a>
-            </li>
-            <li><a href="#" class="hover:text-white transition">Ofertas</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="font-bold text-lg mb-4">Información</h3>
-          <ul class="text-gray-400 space-y-2">
-            <li>
-              <a href="#" class="hover:text-white transition">Sobre nosotros</a>
-            </li>
-            <li>
-              <a href="#" class="hover:text-white transition"
-                >Términos y condiciones</a
-              >
-            </li>
-            <li>
-              <a href="#" class="hover:text-white transition"
-                >Política de privacidad</a
-              >
-            </li>
-            <li>
-              <a href="#" class="hover:text-white transition"
-                >Preguntas frecuentes</a
-              >
-            </li>
-            <li>
-              <a href="#" class="hover:text-white transition">Contacto</a>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="font-bold text-lg mb-4">Contacto</h3>
-          <ul class="text-gray-400 space-y-2">
-            <li class="flex items-start space-x-2">
-              <i class="fas fa-map-marker-alt mt-1"></i>
-              <span>Av. Principal #123, Ciudad</span>
-            </li>
-            <li class="flex items-start space-x-2">
-              <i class="fas fa-phone mt-1"></i>
-              <span>+123 456 7890</span>
-            </li>
-            <li class="flex items-start space-x-2">
-              <i class="fas fa-envelope mt-1"></i>
-              <span>{{ "info@tiendavirtual.com" }}</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div
-        class="border-t border-gray-700 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center"
+  <!-- Paginación -->
+  <div class="mt-10 flex justify-center">
+    <nav class="inline-flex rounded-md shadow">
+      <a
+        href="#"
+        class="px-3 py-2 rounded-l-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-50 text-sm"
       >
-        <p class="text-gray-400 text-sm mb-4 md:mb-0">
-          © 2025 TiendaVirtual. Todos los derechos reservados.
+        <i class="fas fa-chevron-left"></i>
+      </a>
+      <a
+        href="#"
+        class="px-3 py-2 border-t border-b border-gray-300 bg-blue-600 text-white hover:bg-blue-700 text-sm"
+        >1</a
+      >
+      <a
+        href="#"
+        class="px-3 py-2 border-t border-b border-gray-300 bg-white text-gray-500 hover:bg-gray-50 text-sm"
+        >2</a
+      >
+      <a
+        href="#"
+        class="px-3 py-2 border-t border-b border-gray-300 bg-white text-gray-500 hover:bg-gray-50 text-sm"
+        >3</a
+      >
+      <a
+        href="#"
+        class="px-3 py-2 border-t border-b border-gray-300 bg-white text-gray-400 text-sm"
+        >...</a
+      >
+      <a
+        href="#"
+        class="px-3 py-2 border-t border-b border-gray-300 bg-white text-gray-500 hover:bg-gray-50 text-sm"
+        >8</a
+      >
+      <a
+        href="#"
+        class="px-3 py-2 rounded-r-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-50 text-sm"
+      >
+        <i class="fas fa-chevron-right"></i>
+      </a>
+    </nav>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-blue-800 text-white pt-12 pb-8">
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div>
+        <h3 class="font-bold text-lg mb-4">TiendaVirtual</h3>
+        <p class="text-gray-400 mb-4">
+          Tu tienda online de confianza con los mejores productos al mejor
+          precio.
         </p>
         <div class="flex space-x-4">
-          <img src="/api/placeholder/40/25" alt="Visa" class="h-6" />
-          <img src="/api/placeholder/40/25" alt="Mastercard" class="h-6" />
-          <img src="/api/placeholder/40/25" alt="PayPal" class="h-6" />
-          <img
-            src="/api/placeholder/40/25"
-            alt="American Express"
-            class="h-6"
-          />
+          <a href="#" class="text-gray-400 hover:text-white transition"
+            ><i class="fab fa-facebook-f"></i
+          ></a>
+          <a href="#" class="text-gray-400 hover:text-white transition"
+            ><i class="fab fa-twitter"></i
+          ></a>
+          <a href="#" class="text-gray-400 hover:text-white transition"
+            ><i class="fab fa-instagram"></i
+          ></a>
+          <a href="#" class="text-gray-400 hover:text-white transition"
+            ><i class="fab fa-youtube"></i
+          ></a>
         </div>
       </div>
+
+      <div>
+        <h3 class="font-bold text-lg mb-4">Categorías</h3>
+        <ul class="text-gray-400 space-y-2">
+          <li>
+            <a href="#" class="hover:text-white transition">Electrónicos</a>
+          </li>
+          <li><a href="#" class="hover:text-white transition">Hogar</a></li>
+          <li><a href="#" class="hover:text-white transition">Ropa</a></li>
+          <li>
+            <a href="#" class="hover:text-white transition">Alimentos</a>
+          </li>
+          <li><a href="#" class="hover:text-white transition">Ofertas</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-bold text-lg mb-4">Información</h3>
+        <ul class="text-gray-400 space-y-2">
+          <li>
+            <a href="#" class="hover:text-white transition">Sobre nosotros</a>
+          </li>
+          <li>
+            <a href="#" class="hover:text-white transition"
+              >Términos y condiciones</a
+            >
+          </li>
+          <li>
+            <a href="#" class="hover:text-white transition"
+              >Política de privacidad</a
+            >
+          </li>
+          <li>
+            <a href="#" class="hover:text-white transition"
+              >Preguntas frecuentes</a
+            >
+          </li>
+          <li>
+            <a href="#" class="hover:text-white transition">Contacto</a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-bold text-lg mb-4">Contacto</h3>
+        <ul class="text-gray-400 space-y-2">
+          <li class="flex items-start space-x-2">
+            <i class="fas fa-map-marker-alt mt-1"></i>
+            <span>Av. Principal #123, Ciudad</span>
+          </li>
+          <li class="flex items-start space-x-2">
+            <i class="fas fa-phone mt-1"></i>
+            <span>+123 456 7890</span>
+          </li>
+          <li class="flex items-start space-x-2">
+            <i class="fas fa-envelope mt-1"></i>
+            <span>{{'info@tiendavirtual.com'}}</span>
+          </li>
+        </ul>
+      </div>
     </div>
-  </footer>
-</body>
+
+    <div
+      class="border-t border-gray-700 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center"
+    >
+      <p class="text-gray-400 text-sm mb-4 md:mb-0">
+        © 2025 TiendaVirtual. Todos los derechos reservados.
+      </p>
+      <div class="flex space-x-4">
+        <img src="/api/placeholder/40/25" alt="Visa" class="h-6" />
+        <img src="/api/placeholder/40/25" alt="Mastercard" class="h-6" />
+        <img src="/api/placeholder/40/25" alt="PayPal" class="h-6" />
+        <img
+          src="/api/placeholder/40/25"
+          alt="American Express"
+          class="h-6"
+        />
+      </div>
+    </div>
+  </div>
+</footer>

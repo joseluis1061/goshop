@@ -2,33 +2,14 @@ import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/cor
 import { CommonModule } from '@angular/common';
 import { DialogModule } from '@angular/cdk/dialog';
 import { Dialog, DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
-
-export interface ProductoDetalle {
-  id: number;
-  nombre: string;
-  imagen: string;
-  precio: number;
-  precioAnterior?: number;
-  descuento?: number;
-  categoria: string;
-  descripcion: string;
-  caracteristicas: string[];
-  rating: number;
-  opiniones: number;
-  stock: number;
-  estado: string;
-}
-
-export interface CloseModal{
-  accion: string;
-  producto: ProductoDetalle;
-  cantidad?: number;
-}
+import { IProductoDetalle } from '../../../../interface/producto-detalle.interface';
+import { ICloseModal } from '../../../../interface/close-modal.interface';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-producto-detalle-modal',
   standalone: true,
-  imports: [CommonModule, DialogModule],
+  imports: [CommonModule, DialogModule, RouterLink],
   templateUrl: './producto-detalle-modal.component.html',
   styleUrl: './producto-detalle-modal.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -39,8 +20,8 @@ export class ProductoDetalleModalComponent implements OnInit {
   cantidad: number = 1;
 
   constructor(
-    public dialogRef: DialogRef<CloseModal>,
-    @Inject(DIALOG_DATA) public data: ProductoDetalle
+    public dialogRef: DialogRef<ICloseModal>,
+    @Inject(DIALOG_DATA) public data: IProductoDetalle
   ) {}
 
   ngOnInit(): void {

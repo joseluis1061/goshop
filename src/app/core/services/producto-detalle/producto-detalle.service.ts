@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Dialog } from '@angular/cdk/dialog';
-import { ProductoDetalle, ProductoDetalleModalComponent} from '../../shared/components/producto-detalle-modal/producto-detalle-modal/producto-detalle-modal.component';
+import { ProductoDetalleModalComponent} from '../../shared/components/producto-detalle-modal/producto-detalle-modal/producto-detalle-modal.component';
+import { IProductoDetalle } from '../../interface/producto-detalle.interface';
+import { ICloseModal } from '../../interface/close-modal.interface';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -15,8 +17,8 @@ export class ProductoDetalleService {
    * @param producto Los datos del producto a mostrar
    * @returns Observable que emite cuando se cierra el modal
    */
-  abrirDetalleProducto(producto: ProductoDetalle): Observable<any> {
-    const dialogRef = this.dialog.open(ProductoDetalleModalComponent, {
+  abrirDetalleProducto(producto: IProductoDetalle): Observable<ICloseModal | undefined> {
+    const dialogRef = this.dialog.open<ICloseModal>(ProductoDetalleModalComponent, {
       data: producto,
       backdropClass: 'dialog-backdrop',
       hasBackdrop: true,
@@ -27,13 +29,34 @@ export class ProductoDetalleService {
   }
 
   /**
+   * Método helper para obtener un producto por ID
+   * @param id ID del producto
+   * @returns Observable con los datos del producto
+   */
+  getProductoPorId(id: number): Observable<IProductoDetalle> {
+    // En una aplicación real, aquí harías una llamada HTTP a tu API
+    // Pero para este ejemplo, simulamos con una promesa y datos locales
+    return new Observable(observer => {
+      setTimeout(() => {
+        const producto = this.getProductoEjemplo(id);
+        if (producto) {
+          observer.next(producto);
+          observer.complete();
+        } else {
+          observer.error(new Error(`Producto con ID ${id} no encontrado`));
+        }
+      }, 300); // Simula un pequeño retraso de red
+    });
+  }
+
+  /**
    * Método helper para generar datos de ejemplo para usar con el modal
    * @param id ID del producto
    * @returns Datos completos del producto
    */
-  getProductoEjemplo(id: number): ProductoDetalle {
+  private getProductoEjemplo(id: number): IProductoDetalle {
     // Datos de productos de ejemplo para demostración
-    const productos: { [key: number]: ProductoDetalle } = {
+    const productos: { [key: number]: IProductoDetalle } = {
       1: {
         id: 1,
         nombre: 'Smart TV 4K 55 pulgadas',
@@ -54,6 +77,26 @@ export class ProductoDetalleService {
         rating: 4.8,
         opiniones: 120,
         stock: 15,
+        estado: 'En stock'
+      },
+      2: {
+        id: 2,
+        nombre: 'Licuadora 5 Velocidades',
+        imagen: '../assets/products/2.jpg',
+        precio: 49.99,
+        categoria: 'Hogar',
+        descripcion: 'Licuadora potente con 5 velocidades diferentes, cuchillas de acero inoxidable y jarra de vidrio resistente de alta capacidad. Ideal para preparar batidos, salsas y sopas.',
+        caracteristicas: [
+          '5 velocidades + función pulso',
+          'Jarra de vidrio de 1.5 litros',
+          'Cuchillas de acero inoxidable',
+          'Motor de 600W',
+          'Base antideslizante',
+          'Fácil de limpiar'
+        ],
+        rating: 4.5,
+        opiniones: 85,
+        stock: 20,
         estado: 'En stock'
       },
       5: {
