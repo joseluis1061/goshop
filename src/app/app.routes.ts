@@ -2,12 +2,12 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
-    path: 'catalogo-productos',
+    path: 'web',
     loadChildren: () => import('./features/web/web.routes').then(m => m.WEB_ROUTES),
   },
   {
     path: '',
-    redirectTo: 'catalogo-productos',
+    redirectTo: 'web',
     pathMatch: 'full'
   }
 ];

@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
       // En una aplicación real, esto sería reemplazado por una llamada a un servicio de autenticación
       if (email === 'admin@example.com' && password === 'password123') {
         // Login exitoso
-        this.router.navigate(['/catalogo-productos']);
+        this.router.navigate(['/web']);
       } else {
         // Login fallido
         this.loginError = 'Credenciales incorrectas. Por favor, inténtalo de nuevo.';

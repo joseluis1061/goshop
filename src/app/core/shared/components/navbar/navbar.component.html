@@ -2,17 +2,17 @@
 <nav class="bg-blue-600 text-white shadow-md">
   <div class="container mx-auto px-4">
     <div class="flex justify-between items-center py-4">
-      <div routerLink="/catalogo-productos" class="flex items-center space-x-4 cursor-pointer">
+      <div routerLink="/web" class="flex items-center space-x-4 cursor-pointer">
         <img src="../assets/logo-transparente.png" alt="logo" class="w-40">
       </div>
 
       <div class="hidden md:flex space-x-6 items-center">
-        <a routerLink="/catalogo-productos" class="hover:text-blue-200 transition font-medium">Inicio</a>
+        <a routerLink="/web" class="hover:text-blue-200 transition font-medium">Inicio</a>
         <a href="#" class="hover:text-blue-200 transition font-medium border-b-2 border-white">Productos</a>
         <a href="#" class="hover:text-blue-200 transition font-medium">Ofertas</a>
         <a href="#" class="hover:text-blue-200 transition font-medium">Contacto</a>
-        <a routerLink="/catalogo-productos/disponibilidad-producto" class="hover:text-blue-200 transition font-medium">Disponibilidad</a>
-        <a routerLink="/catalogo-productos/historial-compras-cliente" class="hover:text-blue-200 transition font-medium">Historial</a>
+        <a routerLink="/web/disponibilidad-producto" class="hover:text-blue-200 transition font-medium">Disponibilidad</a>
+        <a routerLink="/web/historial-compras-cliente" class="hover:text-blue-200 transition font-medium">Historial</a>
       </div>
 
       <div class="flex items-center space-x-4">
@@ -61,10 +61,10 @@
 
               <!-- Contenido cuando el usuario NO está autenticado -->
               <ng-container *ngIf="!authService.isLoggedIn">
-                <button cdkMenuItem class="w-full text-left px-4 py-2 text-sm text-gray-700" (click)="navigateTo('/login')">
+                <button cdkMenuItem class="w-full text-left px-4 py-2 text-sm text-gray-700" (click)="navigateTo('/web/login')">
                   <i class="fas fa-sign-in-alt mr-2"></i> Iniciar Sesión
                 </button>
-                <button cdkMenuItem class="w-full text-left px-4 py-2 text-sm text-gray-700" (click)="navigateTo('/registro')">
+                <button cdkMenuItem class="w-full text-left px-4 py-2 text-sm text-gray-700" (click)="navigateTo('/web/registro')">
                   <i class="fas fa-user-plus mr-2"></i> Registrarse
                 </button>
               </ng-container>

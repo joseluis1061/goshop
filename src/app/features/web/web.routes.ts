@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { CatalogoProductosComponent } from './modules/catalogo-productos/pages/catalogo-producto/catalogo-productos.component';
 
 export const WEB_ROUTES: Routes = [
   {
@@ -18,6 +17,14 @@ export const WEB_ROUTES: Routes = [
   {
     path: 'disponibilidad-producto',
     loadComponent: () => import('./modules/catalogo-productos/pages/VistaDisponibilidadProductosPV/vista-disponibilidad-productos-pv/vista-disponibilidad-productos-pv.component').then((m) => m.VistaDisponibilidadProductosPVComponent),
+  },
+  {
+    path: 'login',
+    loadComponent: () => import('./modules/auth/login/login.component').then((m) => m.LoginComponent),
+  },
+  {
+    path: 'registro',
+    loadComponent: () => import('./modules/auth/registro/registro.component').then((m) => m.RegistroComponent),
   }
 
 ];
