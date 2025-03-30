@@ -1,0 +1,212 @@
+<app-navbar></app-navbar>
+
+<!-- Encabezado y selección de categoría -->
+<div class="bg-gray-100 py-8">
+  <div class="container mx-auto px-4">
+    <div class="mb-6">
+      <h1 class="text-2xl font-bold text-gray-800">Categoría: {{ currentCategory }}</h1>
+      <p class="text-gray-600">Explora todos nuestros productos de {{ currentCategory }}</p>
+    </div>
+
+    <!-- Selector de categorías -->
+    <div class="overflow-x-auto pb-2">
+      <div class="flex space-x-2">
+        <button
+          *ngFor="let category of categories"
+          [class]="isCategoryActive(category) ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800 border border-blue-400'"
+          class="px-4 py-1 rounded-full text-sm font-medium hover:bg-blue-700 transition whitespace-nowrap"
+          (click)="changeCategory(category)"
+        >
+          {{ category }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Filtros adicionales -->
+<div class="bg-white shadow-sm border-t border-b border-gray-200">
+  <div class="container mx-auto px-4 py-3">
+    <div class="flex flex-col sm:flex-row justify-between items-center">
+      <div class="mb-2 sm:mb-0">
+        <span class="text-gray-600 text-sm">{{ products.length }} productos encontrados</span>
+      </div>
+      <div class="flex space-x-2">
+        <select
+          class="bg-white border border-blue-400 rounded-md px-3 py-1 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        >
+          <option>Ordenar por: Relevancia</option>
+          <option>Precio: Menor a Mayor</option>
+          <option>Precio: Mayor a Menor</option>
+          <option>Más vendidos</option>
+        </select>
+
+        <select
+          class="bg-white border border-blue-400 rounded-md px-3 py-1 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        >
+          <option>Mostrar: 12 por página</option>
+          <option>Mostrar: 24 por página</option>
+          <option>Mostrar: 48 por página</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Grid de productos -->
+<div class="container mx-auto px-4 py-8">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <!-- Producto Card -->
+    <div
+      *ngFor="let product of products"
+      class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+    >
+      <div class="relative">
+        <img
+          [src]="product.image"
+          [alt]="product.name"
+          class="w-full h-56 object-cover"
+        />
+        <span
+          *ngIf="product.discount"
+          class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded"
+        >-{{ product.discount }}%</span>
+      </div>
+      <div class="p-4">
+        <div class="flex justify-between items-start mb-2">
+          <span class="text-xs text-gray-500">{{ product.category }}</span>
+          <div class="flex items-center">
+            <i class="fas fa-star text-yellow-400 text-xs"></i>
+            <span class="text-xs text-gray-600 ml-1">{{ product.rating }} ({{ product.reviews }})</span>
+          </div>
+        </div>
+        <h3 class="font-semibold text-gray-800 mb-2">
+          {{ product.name }}
+        </h3>
+        <div class="flex items-end mb-4">
+          <span class="text-lg font-bold text-blue-600">${{ product.price }}</span>
+          <span *ngIf="product.oldPrice" class="text-sm text-gray-400 line-through ml-2">${{ product.oldPrice }}</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span
+            [class]="product.stock === 'En stock' ? 'text-xs text-green-600 bg-green-100' : product.stock === 'Pocas unidades' ? 'text-xs text-orange-600 bg-orange-100' : 'text-xs text-red-600 bg-red-100'"
+            class="px-2 py-1 rounded border border-blue-400"
+          >{{ product.stock }}</span>
+          <button
+            class="bg-orange-500 text-white px-3 py-1.5 rounded-md text-sm hover:bg-orange-600 transition flex items-center"
+          >
+            <i class="fas fa-cart-plus mr-1"></i> Agregar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sin resultados (condicional) -->
+  <div *ngIf="products.length === 0" class="text-center py-16">
+    <div class="text-5xl text-gray-300 mb-4">
+      <i class="fas fa-search"></i>
+    </div>
+    <h3 class="text-xl font-semibold text-gray-800 mb-2">No se encontraron productos</h3>
+    <p class="text-gray-600">Intenta con otra categoría o revisa los filtros aplicados</p>
+  </div>
+
+  <!-- Paginación -->
+  <div class="mt-10 flex justify-center" *ngIf="products.length > 0">
+    <nav class="inline-flex rounded-md shadow">
+      <a
+        href="#"
+        class="px-3 py-2 rounded-l-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-50 text-sm"
+      >
+        <i class="fas fa-chevron-left"></i>
+      </a>
+      <a
+        href="#"
+        class="px-3 py-2 border-t border-b border-gray-300 bg-blue-600 text-white hover:bg-blue-700 text-sm"
+        >1</a
+      >
+      <a
+        href="#"
+        class="px-3 py-2 border-t border-b border-gray-300 bg-white text-gray-500 hover:bg-gray-50 text-sm"
+        >2</a
+      >
+      <a
+        href="#"
+        class="px-3 py-2 rounded-r-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-50 text-sm"
+      >
+        <i class="fas fa-chevron-right"></i>
+      </a>
+    </nav>
+  </div>
+</div>
+
+<!-- Productos relacionados -->
+<div class="bg-gray-100 py-8">
+  <div class="container mx-auto px-4">
+    <h2 class="text-xl font-bold mb-6">También te puede interesar</h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+      <!-- Producto recomendado 1 -->
+      <div class="bg-white rounded-lg shadow-sm p-4 flex space-x-3">
+        <img
+          src="../assets/products/2.jpg"
+          alt="Producto recomendado"
+          class="w-16 h-16 object-cover rounded"
+        />
+        <div>
+          <h4 class="font-medium text-sm text-gray-800">Licuadora 5 Velocidades</h4>
+          <div class="flex items-center mt-1">
+            <span class="text-sm font-bold text-blue-600">$49.99</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Producto recomendado 2 -->
+      <div class="bg-white rounded-lg shadow-sm p-4 flex space-x-3">
+        <img
+          src="../assets/products/3.jpg"
+          alt="Producto recomendado"
+          class="w-16 h-16 object-cover rounded"
+        />
+        <div>
+          <h4 class="font-medium text-sm text-gray-800">Chaqueta Deportiva</h4>
+          <div class="flex items-center mt-1">
+            <span class="text-sm font-bold text-blue-600">$79.99</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Producto recomendado 3 -->
+      <div class="bg-white rounded-lg shadow-sm p-4 flex space-x-3">
+        <img
+          src="../assets/products/4.jpg"
+          alt="Producto recomendado"
+          class="w-16 h-16 object-cover rounded"
+        />
+        <div>
+          <h4 class="font-medium text-sm text-gray-800">Café Gourmet Premium</h4>
+          <div class="flex items-center mt-1">
+            <span class="text-sm font-bold text-blue-600">$24.99</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Producto recomendado 4 -->
+      <div class="bg-white rounded-lg shadow-sm p-4 flex space-x-3">
+        <img
+          src="../assets/products/6.jpg"
+          alt="Producto recomendado"
+          class="w-16 h-16 object-cover rounded"
+        />
+        <div>
+          <h4 class="font-medium text-sm text-gray-800">Juego de Sábanas</h4>
+          <div class="flex items-center mt-1">
+            <span class="text-sm font-bold text-blue-600">$35.99</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer integrado por componente común -->
